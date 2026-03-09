@@ -1,125 +1,410 @@
-import React from "react";
-import { motion } from "motion/react";
+import React, { useState, useMemo, useEffect } from "react";
+import { motion, AnimatePresence } from "motion/react";
 import {
-    ClipboardList,
+    Search,
+    X,
+    FileText,
     Clock,
     DollarSign,
-    UserCheck,
     ShieldCheck,
-    FileText,
-    ChevronRight,
-    Info
+    ArrowRight,
+    Leaf,
+    Settings,
+    HeartPulse,
+    CheckCircle2,
+    Download,
+    Sparkles,
+    Zap,
+    Scale,
+    Users,
+    Activity
 } from "lucide-react";
 import { BackButton } from "../components/BackButton";
-import "./ProfilPages.css";
+import "./StandarPelayanan.css";
+
+const servicesData = [
+    {
+        id: 1,
+        category: "Tanaman Pangan",
+        title: "Sertifikasi Benih Unggul",
+        shortTitle: "Sertifikasi Benih",
+        icon: <Leaf />,
+        size: "large",
+        color: "from-emerald-500 to-green-600",
+        desc: "Layanan pengujian mutu dan sertifikasi benih untuk menjamin kualitas benih yang beredar di masyarakat.",
+        persyaratan: [
+            "Surat permohonan sertifikasi",
+            "Dokumen asal usul benih/sumber",
+            "Peta lokasi penangkaran",
+            "Deskripsi varietas"
+        ],
+        prosedur: [
+            { title: "Pendaftaran", desc: "Penyerahan berkas & verifikasi" },
+            { title: "Inspeksi Lapangan", desc: "Pemeriksaan fase vegetatif" },
+            { title: "Sampling", desc: "Pengambilan contoh benih" },
+            { title: "Uji Lab", desc: "Analisis kemurnian & daya tumbuh" },
+            { title: "Pelabelan", desc: "Penerbitan label & sertifikat" }
+        ],
+        waktu: "14-21 Hari",
+        biaya: "PNBP / Mandiri",
+        produk: "Label Mutu Benih",
+        stats: "1.2k+ Sertifikat/Tahun"
+    },
+    {
+        id: 2,
+        category: "Perkebunan",
+        title: "Rekomendasi Izin Usaha",
+        shortTitle: "Izin Usaha",
+        icon: <Scale />,
+        size: "medium",
+        color: "from-amber-400 to-orange-500",
+        desc: "Pemberian rekomendasi teknis untuk pembukaan atau perluasan usaha perkebunan di wilayah Provinsi.",
+        persyaratan: [
+            "NIB (Nomor Induk Berusaha)",
+            "Rencana Kerja Tahunan",
+            "KTP Pemilik",
+            "Dokumen Lingkungan (AMDAL)"
+        ],
+        prosedur: [
+            { title: "Pengajuan", desc: "Input berkas digital" },
+            { title: "Verifikasi", desc: "Cek admin & kesesuaian lahan" },
+            { title: "Tinjauan", desc: "Kunjungan lapangan Tim Teknis" },
+            { title: "Rekomendasi", desc: "Penerbitan SK Rekomendasi" }
+        ],
+        waktu: "10 Hari Kerja",
+        biaya: "Gratis (Bebas Biaya)",
+        produk: "SK Rekom Teknis IUP",
+        stats: "98% Approval Rate"
+    },
+    {
+        id: 3,
+        category: "Peternakan",
+        title: "Pelayanan Kesehatan Hewan",
+        shortTitle: "Kesehatan Hewan",
+        icon: <HeartPulse />,
+        size: "small",
+        color: "from-rose-500 to-pink-600",
+        desc: "Layanan pemeriksaan kesehatan hewan, pengobatan, serta pemberian vitamin bagi ternak masyarakat.",
+        persyaratan: ["Identitas Pemilik", "Data Populasi", "Riwayat Penyakit"],
+        prosedur: [
+            { title: "Laporan", desc: "Call Center atau Puskeswan" },
+            { title: "Diagnosa", desc: "Pemeriksaan fisik di lokasi" },
+            { title: "Tindakan", desc: "Pemberian obat/vaksin" },
+            { title: "Selesai", desc: "Penerbitan SKKH" }
+        ],
+        waktu: "1x24 Jam (Emergency)",
+        biaya: "Biaya Obat Subsidid",
+        produk: "SKKH (Surat Kesehatan)",
+        stats: "24/7 Response"
+    },
+    {
+        id: 4,
+        category: "Alsintan",
+        title: "Peminjaman Mesin Pertanian",
+        shortTitle: "Pinjam Alsintan",
+        icon: <Settings />,
+        size: "medium",
+        color: "from-blue-500 to-indigo-600",
+        desc: "Layanan fasilitasi peminjaman traktor, combine harvester, dan alat lainnya untuk kelompok tani.",
+        persyaratan: ["Proposal Gapoktan", "Surat Tanggung Jawab", "Data CPCL"],
+        prosedur: [
+            { title: "Proposal", desc: "Pengajuan via Dinas" },
+            { title: "Cek Lapangan", desc: "Verifikasi Kelompok & Lokasi" },
+            { title: "MoU", desc: "Penandatanganan Berita Acara" },
+            { title: "Dropping", desc: "Mobilisasi Alat ke Lokasi" }
+        ],
+        waktu: "7 Hari Kerja",
+        biaya: "Dana Operasional Kelompok",
+        produk: "Izin Pakai Alat",
+        stats: "500+ Unit Tersedia"
+    },
+    {
+        id: 5,
+        category: "Umum",
+        title: "Konsultasi & Bimtek Budidaya",
+        shortTitle: "Bimtek Budidaya",
+        icon: <Users />,
+        size: "small",
+        color: "from-violet-500 to-purple-600",
+        desc: "Layanan bimbingan teknis dan konsultasi bagi petani/pengusaha terkait teknik budidaya modern.",
+        persyaratan: ["Identitas", "Info Lahan"],
+        prosedur: [
+            { title: "Jadwal", desc: "Booking sesi konsultasi" },
+            { title: "Sesi", desc: "Diskusi dengan Penyuluh" },
+            { title: "Output", desc: "Penyusunan SOP Budidaya" }
+        ],
+        waktu: "Sesuai Janji",
+        biaya: "Gratis",
+        produk: "Rekomendasi Budidaya",
+        stats: "Weekly Updates"
+    },
+    {
+        id: 6,
+        category: "Informasi",
+        title: "Penyediaan Data & Statistik",
+        shortTitle: "Data Pertanian",
+        icon: <Activity />,
+        size: "small",
+        color: "from-cyan-500 to-blue-500",
+        desc: "Akses data statistik produksi, pasar, dan harga komoditas pertanian secara real-time.",
+        persyaratan: ["Permohonan Data", "Tujuan Penggunaan"],
+        prosedur: [
+            { title: "Request", desc: "Pilih dataset yang dibutuhkan" },
+            { title: "Approve", desc: "Cek klasifikasi informasi" },
+            { title: "Export", desc: "Data dikirim dalam format PDF/Excel" }
+        ],
+        waktu: "2 Hari Kerja",
+        biaya: "Gratis / Terbuka",
+        produk: "Data Statistik / Infografis",
+        stats: "Lengkap & Akurat"
+    }
+];
+
+const categories = ["Semua", "Tanaman Pangan", "Perkebunan", "Peternakan", "Alsintan", "Umum"];
 
 export const StandarPelayanan = () => {
-    const standards = [
-        {
-            title: "Persyaratan Pelayanan",
-            desc: "Dokumen dan kelengkapan yang harus dipenuhi oleh pemohon untuk mendapatkan layanan.",
-            icon: <FileText size={28} />,
-            color: "border-green-500 text-green-600"
-        },
-        {
-            title: "Sistem, Mekanisme, dan Prosedur",
-            desc: "Tata cara pelayanan yang dilakukan bagi pemberi dan penerima pelayanan termasuk pengaduan.",
-            icon: <UserCheck size={28} />,
-            color: "border-emerald-500 text-emerald-600"
-        },
-        {
-            title: "Jangka Waktu Penyelesaian",
-            desc: "Waktu yang diperlukan sejak diterimanya permintaan sampai dengan selesainya pelayanan.",
-            icon: <Clock size={28} />,
-            color: "border-amber-500 text-amber-600"
-        },
-        {
-            title: "Biaya / Tarif",
-            desc: "Besaran biaya yang dikenakan kepada penerima layanan dalam mengurus dan/atau memperoleh pelayanan.",
-            icon: <DollarSign size={28} />,
-            color: "border-blue-500 text-blue-600"
-        },
-        {
-            title: "Produk Pelayanan",
-            desc: "Hasil pelayanan yang diberikan dan diterima sesuai dengan ketentuan yang telah ditetapkan.",
-            icon: <ShieldCheck size={28} />,
-            color: "border-purple-500 text-purple-600"
-        },
-        {
-            title: "Penanganan Pengaduan",
-            desc: "Mekanisme pengelolaan pengaduan, saran, dan masukan dari pengguna layanan.",
-            icon: <Info size={28} />,
-            color: "border-red-500 text-red-600"
-        }
-    ];
+    const [searchTerm, setSearchTerm] = useState("");
+    const [activeTab, setActiveTab] = useState("Semua");
+    const [selectedId, setSelectedId] = useState(null);
+    const selectedService = servicesData.find(s => s.id === selectedId);
+
+    const filteredServices = useMemo(() => {
+        return servicesData.filter(s => {
+            const matchesSearch = s.title.toLowerCase().includes(searchTerm.toLowerCase());
+            const matchesTab = activeTab === "Semua" || s.category === activeTab;
+            return matchesSearch && matchesTab;
+        });
+    }, [searchTerm, activeTab]);
+
+    useEffect(() => {
+        if (selectedId) document.body.style.overflow = "hidden";
+        else document.body.style.overflow = "unset";
+    }, [selectedId]);
 
     return (
-        <div className="profil-page">
-            <div className="profil-bg-glow" />
-            <div className="profil-bg-glow-2" />
+        <div className="sp-container">
+            <div className="sp-bg-elements">
+                <div className="sp-glow-1" />
+                <div className="sp-glow-2" />
+            </div>
 
-            <div className="profil-content max-w-7xl">
+            <div className="sp-content">
                 <BackButton />
 
-                <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 mt-12">
+                <header className="sp-hero">
                     <motion.div
-                        initial={{ opacity: 0, x: -30 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        className="lg:col-span-12 flex flex-col gap-12"
+                        initial={{ opacity: 0, scale: 0.9 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        className="flex flex-col items-center"
+                        style={{ gap: "2.5rem" }}
                     >
-                        <div className="profil-header-card group p-10 lg:p-16">
-                            <div className="profil-header-accent" />
-                            <div className="flex flex-col gap-8">
-                                <div className="flex items-center gap-6">
-                                    <div className="profil-icon-wrapper scale-110">
-                                        <div className="profil-icon-glow" />
-                                        <ClipboardList size={32} />
-                                    </div>
-                                    <h1 className="profil-title !mb-0 text-3xl lg:text-5xl font-black">Standar Pelayanan</h1>
-                                </div>
-                                <p className="profil-text text-lg !max-w-none text-slate-600 leading-relaxed">
-                                    Standar Pelayanan merupakan tolok ukur yang dipergunakan sebagai pedoman penyelenggaraan pelayanan
-                                    dan acuan penilaian kualitas pelayanan sebagai kewajiban dan janji penyelenggara kepada masyarakat
-                                    dalam rangka pelayanan yang berkualitas, cepat, mudah, terjangkau, and terukur.
-                                </p>
-                            </div>
+                        <div className="sp-badge">
+                            <Sparkles size={14} /> Service Standard V2.0
                         </div>
+                        <h1 className="sp-hero-title">
+                            Ecosystem <span>Layanan</span> <br />Pertanian Modern
+                        </h1>
+                        <p className="sp-hero-subtitle">
+                            Menghubungkan petani Sumatera Barat ke pusat informasi dan bantuan teknis melalui standar pelayanan prima kelas dunia.
+                        </p>
+                    </motion.div>
 
-                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                            {standards.map((item, idx) => (
-                                <motion.div
-                                    key={idx}
-                                    initial={{ opacity: 0, y: 30 }}
-                                    whileInView={{ opacity: 1, y: 0 }}
-                                    viewport={{ once: true }}
-                                    transition={{ delay: idx * 0.1 }}
-                                    className={`bg-white p-10 rounded-[2.5rem] border-l-8 ${item.color.split(' ')[0]} shadow-xl flex flex-col gap-6 hover:scale-[1.02] transition-all group`}
+                    <div className="sp-controls">
+                        <div className="sp-tabs">
+                            {categories.map(cat => (
+                                <button
+                                    key={cat}
+                                    onClick={() => setActiveTab(cat)}
+                                    className={`sp-tab-btn ${activeTab === cat ? 'active' : ''}`}
                                 >
-                                    <div className={`p-5 rounded-2xl bg-slate-50 w-fit ${item.color.split(' ')[1]} group-hover:bg-white group-hover:shadow-lg transition-all`}>
-                                        {item.icon}
-                                    </div>
-                                    <h3 className="text-xl font-black text-slate-800 leading-tight">{item.title}</h3>
-                                    <p className="text-sm text-slate-500 leading-relaxed font-medium">{item.desc}</p>
-                                    <div className="mt-auto pt-6 flex items-center gap-2 text-xs font-black uppercase tracking-widest text-slate-400 group-hover:text-green-600 transition-colors">
-                                        Lihat Selengkapnya <ChevronRight size={14} />
-                                    </div>
-                                </motion.div>
+                                    {cat}
+                                </button>
                             ))}
                         </div>
+                        <div className="sp-search-wrapper">
+                            <Search size={18} className="sp-search-icon" />
+                            <input
+                                type="text"
+                                placeholder="Search ecosystem services..."
+                                className="sp-search-input"
+                                value={searchTerm}
+                                onChange={(e) => setSearchTerm(e.target.value)}
+                            />
+                        </div>
+                    </div>
+                </header>
 
-                        <div className="bg-green-600 rounded-[3.5rem] p-12 lg:p-16 text-white relative overflow-hidden shadow-2xl shadow-green-900/20 mt-8">
-                            <div className="absolute top-0 right-0 w-80 h-80 bg-white/10 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/2" />
-                            <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-12">
-                                <div className="flex-1">
-                                    <h3 className="text-3xl lg:text-4xl font-black mb-6 tracking-tighter">Kepuasan Anda adalah Prioritas Kami</h3>
-                                    <p className="text-green-50/80 font-medium text-lg">Kami terus berupaya meningkatkan standar pelayanan demi kenyamanan dan kepuasan masyarakat penerima layanan di sektor pertanian.</p>
+                <motion.div layout className="sp-bento-grid">
+                    <AnimatePresence mode="popLayout">
+                        {filteredServices.map((service, index) => (
+                            <motion.div
+                                key={service.id}
+                                layoutId={`card-${service.id}`}
+                                initial={{ opacity: 0, y: 30 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                exit={{ opacity: 0, scale: 0.9 }}
+                                transition={{ delay: index * 0.05 }}
+                                onClick={() => setSelectedId(service.id)}
+                                className={`sp-card sp-card-${service.size}`}
+                            >
+                                <div className="sp-card-inner">
+                                    <div className={`sp-card-mesh bg-gradient-to-br ${service.color}`} />
+
+                                    <div className={`sp-card-icon-box bg-gradient-to-br ${service.color}`}>
+                                        {React.cloneElement(service.icon, { size: 36 })}
+                                    </div>
+
+                                    <div className="sp-card-footer">
+                                        <div className="sp-card-category">{service.category}</div>
+                                        <h3 className="sp-card-title">
+                                            {service.size === 'large' ? service.title : service.shortTitle}
+                                        </h3>
+                                        {service.size !== 'small' && (
+                                            <p className="sp-card-desc">
+                                                {service.desc}
+                                            </p>
+                                        )}
+                                        <div className="sp-card-action-bar">
+                                            <div className="sp-card-stat">
+                                                {service.stats}
+                                            </div>
+                                            <div className="sp-card-arrow">
+                                                <ArrowRight size={20} />
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                                <button className="px-10 py-5 bg-white text-green-700 rounded-2xl font-black uppercase text-xs tracking-widest shadow-xl hover:scale-105 transition-all whitespace-nowrap">
-                                    Unduh Dokumen Standar (PDF)
-                                </button>
+                            </motion.div>
+                        ))}
+                    </AnimatePresence>
+                </motion.div>
+
+                <AnimatePresence>
+                    {selectedId && (
+                        <>
+                            <motion.div
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                exit={{ opacity: 0 }}
+                                onClick={() => setSelectedId(null)}
+                                className="sp-overlay"
+                            />
+
+                            <motion.div
+                                layoutId={`card-${selectedId}`}
+                                className="sp-drawer"
+                            >
+                                <div className="sp-drawer-header">
+                                    <div className="sp-drawer-header-left">
+                                        <div className={`sp-drawer-icon bg-gradient-to-br ${selectedService.color}`}>
+                                            {React.cloneElement(selectedService.icon, { size: 24 })}
+                                        </div>
+                                        <h2 className="sp-drawer-title">{selectedService.title}</h2>
+                                    </div>
+                                    <button onClick={() => setSelectedId(null)} className="sp-close-btn">
+                                        <X size={24} />
+                                    </button>
+                                </div>
+
+                                <div className="sp-drawer-body">
+                                    <section>
+                                        <p className="sp-drawer-desc">
+                                            "{selectedService.desc}"
+                                        </p>
+                                    </section>
+
+                                    <section>
+                                        <h3 className="sp-section-label">
+                                            <Zap size={16} className="text-green-500" /> Alur Perjalanan Farmer's Journey
+                                        </h3>
+                                        <div className="sp-stepper">
+                                            {selectedService.prosedur.map((step, i) => (
+                                                <div key={i} className="sp-stepper-item">
+                                                    <div className="sp-stepper-left">
+                                                        <div className="sp-stepper-node">{i + 1}</div>
+                                                        {i < selectedService.prosedur.length - 1 && <div className="sp-stepper-line" />}
+                                                    </div>
+                                                    <div className="sp-stepper-content">
+                                                        <h4 className="sp-stepper-title">{step.title}</h4>
+                                                        <p className="sp-stepper-desc">{step.desc}</p>
+                                                    </div>
+                                                </div>
+                                            ))}
+                                        </div>
+                                    </section>
+
+                                    <section className="sp-info-grid">
+                                        <div className="sp-info-card">
+                                            <h3 className="sp-section-label" style={{ marginBottom: "2rem" }}>
+                                                <FileText size={16} className="text-blue-500" /> Mandatory Dokumen
+                                            </h3>
+                                            <div className="sp-doc-list">
+                                                {selectedService.persyaratan.map((item, i) => (
+                                                    <div key={i} className="sp-doc-item">
+                                                        <div className="sp-check-icon"><CheckCircle2 size={18} /></div>
+                                                        {item}
+                                                    </div>
+                                                ))}
+                                            </div>
+                                        </div>
+
+                                        <div className="sp-stats-column">
+                                            <div className="sp-mini-stat">
+                                                <div className="sp-mini-stat-icon bg-orange-50 text-orange-500"><Clock size={28} /></div>
+                                                <div>
+                                                    <div className="sp-mini-stat-label">Time To Finish</div>
+                                                    <div className="sp-mini-stat-value">{selectedService.waktu}</div>
+                                                </div>
+                                            </div>
+                                            <div className="sp-mini-stat">
+                                                <div className="sp-mini-stat-icon bg-blue-50 text-blue-500"><DollarSign size={28} /></div>
+                                                <div>
+                                                    <div className="sp-mini-stat-label">Biaya / Tarif</div>
+                                                    <div className="sp-mini-stat-value">{selectedService.biaya}</div>
+                                                </div>
+                                            </div>
+                                            <div className="sp-mini-stat">
+                                                <div className="sp-mini-stat-icon bg-violet-50 text-violet-500"><ShieldCheck size={28} /></div>
+                                                <div>
+                                                    <div className="sp-mini-stat-label">Produk Akhir</div>
+                                                    <div className="sp-mini-stat-value">{selectedService.produk}</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </section>
+
+                                    <div className="sp-drawer-action-foot">
+                                        <button className="sp-btn-download">
+                                            <Download size={20} /> Unduh Dokumen Lengkap (PDF)
+                                        </button>
+                                    </div>
+                                </div>
+                            </motion.div>
+                        </>
+                    )}
+                </AnimatePresence>
+
+                <div className="sp-footer-container">
+                    <div className="sp-footer-card">
+                        <div className="sp-footer-glow" />
+                        <div className="sp-footer-content">
+                            <div className="sp-footer-text-box">
+                                <h2 className="sp-footer-title">
+                                    Belum menemukan <span>layanan</span> yang tepat?
+                                </h2>
+                                <p className="sp-footer-desc">
+                                    Admin kami siap membantu menjawab pertanyaan teknis terkait segala jenis administrasi pertanian 24/7.
+                                </p>
+                                <div className="sp-btn-group">
+                                    <button className="sp-btn-primary">WhatsApp Support</button>
+                                    <button className="sp-btn-secondary">Surat Elektronik</button>
+                                </div>
+                            </div>
+                            <div className="sp-footer-icon-huge">
+                                <Zap size={100} className="fill-white" />
                             </div>
                         </div>
-                    </motion.div>
+                    </div>
                 </div>
             </div>
         </div>
