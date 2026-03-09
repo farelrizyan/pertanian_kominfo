@@ -1,0 +1,277 @@
+.layanan-page {
+  min-height: 100vh;
+  background-color: #ffffff;
+  padding-top: 10rem; /* Give more space for the luxury navbar */
+  padding-bottom: 6rem;
+  position: relative;
+}
+
+/* Luxury Background Elements */
+.profil-bg-glow {
+  position: absolute;
+  top: -10%;
+  left: -5%;
+  width: 40%;
+  height: 60%;
+  background: radial-gradient(circle, rgba(59, 130, 246, 0.08) 0%, transparent 70%);
+  filter: blur(120px);
+  pointer-events: none;
+}
+
+.profil-bg-glow-2 {
+  position: absolute;
+  bottom: -10%;
+  right: -5%;
+  width: 40%;
+  height: 60%;
+  background: radial-gradient(circle, rgba(255, 122, 0, 0.05) 0%, transparent 70%);
+  filter: blur(120px);
+  pointer-events: none;
+}
+
+/* Main Hub Card */
+.profil-header-card {
+  background: white;
+  border: 1px solid #f1f5f9;
+  padding: 4rem;
+  border-radius: 2rem;
+  box-shadow: 0 40px 100px -20px rgba(0, 0, 0, 0.05);
+  position: relative;
+  overflow: hidden;
+}
+
+.profil-header-accent {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 6px;
+  background: linear-gradient(90deg, #14532d, #ff7a00);
+}
+
+.profil-title {
+  font-size: 3.5rem;
+  font-weight: 900;
+  color: #0f172a;
+  letter-spacing: -0.04em;
+  line-height: 1;
+  margin-bottom: 1.5rem;
+}
+
+.profil-text {
+  font-size: 1.125rem;
+  color: #64748b;
+  line-height: 1.8;
+  max-width: 40rem;
+}
+
+/* Stats Dashboard */
+.layanan-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+}
+
+.layanan-stat-card {
+  background: #f8fafc;
+  padding: 1.5rem;
+  border-radius: 1.5rem;
+  border: 1px solid #f1f5f9;
+  text-align: left;
+  transition: all 0.4s cubic-bezier(0.2, 1, 0.3, 1);
+}
+
+.layanan-stat-card:hover {
+  background: white;
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+  border-color: #22c55e;
+}
+
+.layanan-stat-value {
+  display: block;
+  font-size: 2rem;
+  font-weight: 800;
+  color: #14532d;
+  margin: 0.5rem 0;
+}
+
+.layanan-stat-label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: 800;
+  color: #94a3b8;
+}
+
+/* Service Item Cards */
+.layanan-grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 2rem;
+  margin-top: 4rem;
+}
+
+.layanan-item-wrapper {
+  grid-column: span 6;
+}
+
+@media (max-width: 1024px) {
+  .layanan-item-wrapper {
+    grid-column: span 12;
+  }
+}
+
+.layanan-item-card {
+  background: white;
+  border: 1px solid #f1f5f9;
+  border-radius: 2rem;
+  padding: 3rem;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.5s cubic-bezier(0.2, 1, 0.3, 1);
+  position: relative;
+}
+
+.layanan-item-card:hover {
+  transform: translateY(-12px);
+  box-shadow: 0 50px 80px -20px rgba(0, 0, 0, 0.08);
+  border-color: #22c55e;
+}
+
+.layanan-item-icon-box {
+  width: 5rem;
+  height: 5rem;
+  border-radius: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f8fafc;
+  margin-bottom: 2rem;
+  transition: all 0.4s;
+}
+
+.layanan-item-card:hover .layanan-item-icon-box {
+  background: #14532d;
+  color: white !important;
+  transform: rotate(10deg);
+}
+
+.layanan-item-title {
+  font-size: 1.875rem;
+  font-weight: 800;
+  color: #0f172a;
+  letter-spacing: -0.02em;
+  margin-bottom: 1rem;
+}
+
+.layanan-item-desc {
+  color: #64748b;
+  line-height: 1.7;
+  font-size: 1rem;
+  margin-bottom: 2.5rem;
+}
+
+.layanan-item-features {
+  margin-top: auto;
+  margin-bottom: 2.5rem;
+  display: grid;
+  gap: 1rem;
+}
+
+.layanan-feature-dot {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #334155;
+}
+
+.layanan-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 2px;
+  background-color: #ff7a00;
+}
+
+.layanan-action-btn {
+  padding: 1.25rem 2rem;
+  background: #f8fafc;
+  color: #14532d;
+  border-radius: 1.25rem;
+  font-size: 0.875rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: all 0.3s;
+  border: 1px solid transparent;
+}
+
+.layanan-action-btn:hover {
+  background: #14532d;
+  color: white;
+  border-color: #14532d;
+}
+
+/* Help Section Lux */
+.layanan-help-banner {
+  background: #0f172a;
+  border-radius: 3rem;
+  padding: 5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  margin-top: 4rem;
+}
+
+.layanan-help-glow {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 30rem;
+  height: 30rem;
+  background: radial-gradient(circle, rgba(59, 130, 246, 0.15) 0%, transparent 70%);
+  filter: blur(80px);
+}
+
+.layanan-help-title {
+  font-size: 3rem;
+  font-weight: 900;
+  color: white;
+  letter-spacing: -0.04em;
+  line-height: 1;
+  margin-bottom: 1rem;
+}
+
+.layanan-help-text {
+  color: #94a3b8;
+  font-size: 1.125rem;
+  max-width: 30rem;
+}
+
+.layanan-help-btn {
+  background: #ff7a00;
+  color: white;
+  padding: 1.5rem 3rem;
+  border-radius: 2rem;
+  font-size: 1rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  transition: all 0.4s;
+  box-shadow: 0 20px 40px rgba(255, 122, 0, 0.2);
+}
+
+.layanan-help-btn:hover {
+  background: white;
+  color: #0f172a;
+  transform: scale(1.05);
+  box-shadow: 0 30px 60px rgba(0,0,0,0.2);
+}

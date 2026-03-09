@@ -1,0 +1,4 @@
+/* Reusing shared styles from Berita.css or define specific styles here */
+.page-mitra .page-title {
+  color: var(--color-agri-green, #5cb85c);
+}

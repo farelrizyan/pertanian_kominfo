@@ -1,0 +1,196 @@
+/* Modern, Minimal Back Button Styles */
+.back-button-wrapper {
+  position: fixed;
+  bottom: 40px;
+  left: 32px;
+  z-index: 1000;
+}
+
+@media (max-width: 768px) {
+  .back-button-wrapper {
+    bottom: 30px;
+    left: 24px;
+  }
+}
+
+.back-button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  padding: 8px 16px 8px 8px;
+  border-radius: 40px;
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  box-shadow: 0 4px 20px -8px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Hover Effect */
+.back-button:hover {
+  background: rgba(255, 255, 255, 0.95);
+  border-color: rgba(34, 197, 94, 0.3);
+  box-shadow: 0 8px 25px -8px rgba(34, 197, 94, 0.3);
+  transform: translateX(-4px);
+  padding-right: 24px;
+}
+
+/* Active Effect */
+.back-button:active {
+  transform: scale(0.95) translateX(-2px);
+}
+
+/* Icon Container */
+.back-button-icon {
+  width: 36px;
+  height: 36px;
+  background: linear-gradient(135deg, #ffffff, #f8fafc);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #334155;
+  box-shadow: 0 4px 10px -2px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s;
+  position: relative;
+  border: 1px solid rgba(255, 255, 255, 0.8);
+}
+
+/* Icon Hover Effect */
+.back-button:hover .back-button-icon {
+  background: linear-gradient(135deg, #22c55e, #16a34a);
+  color: white;
+  transform: rotate(-5deg) scale(1.05);
+  box-shadow: 0 6px 15px -3px rgba(34, 197, 94, 0.4);
+}
+
+/* Icon Glow Effect */
+.back-button-icon-glow {
+  position: absolute;
+  inset: -2px;
+  border-radius: 50%;
+  background: radial-gradient(circle at center, rgba(34, 197, 94, 0.3), transparent 70%);
+  opacity: 0;
+  transition: opacity 0.3s;
+  z-index: -1;
+}
+
+.back-button:hover .back-button-icon-glow {
+  opacity: 1;
+  animation: pulseGlow 2s infinite;
+}
+
+@keyframes pulseGlow {
+  0%, 100% {
+    opacity: 0.3;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.6;
+    transform: scale(1.2);
+  }
+}
+
+/* Text Style */
+.back-button-text {
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  color: #475569;
+  transition: all 0.3s;
+  position: relative;
+  text-transform: uppercase;
+}
+
+.back-button:hover .back-button-text {
+  color: #16a34a;
+  letter-spacing: 0.05em;
+}
+
+/* Decorative Line */
+.back-button-line {
+  position: absolute;
+  bottom: 8px;
+  left: 48px;
+  right: 16px;
+  height: 2px;
+  background: linear-gradient(90deg, #22c55e, #16a34a, transparent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  border-radius: 1px;
+  opacity: 0.5;
+}
+
+.back-button:hover .back-button-line {
+  transform: scaleX(1);
+}
+
+/* Optional: Variasi dengan Home Icon (bisa diaktifkan dengan menambahkan prop) */
+.back-button.home-version .back-button-icon svg:first-child {
+  display: none;
+}
+
+.back-button.home-version .back-button-icon svg:last-child {
+  display: block;
+}
+
+/* Untuk halaman dengan background gelap */
+.back-button.light-bg {
+  background: rgba(0, 0, 0, 0.3);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.back-button.light-bg .back-button-text {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.back-button.light-bg .back-button-icon {
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+  .back-button-wrapper {
+    bottom: 24px;
+    left: 16px;
+  }
+  
+  .back-button {
+    padding: 6px 12px 6px 6px;
+  }
+  
+  .back-button-icon {
+    width: 32px;
+    height: 32px;
+  }
+  
+  .back-button-text {
+    font-size: 0.75rem;
+  }
+  
+  .back-button:hover {
+    padding-right: 16px;
+  }
+}
+
+/* Animasi masuk */
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.back-button-wrapper {
+  animation: slideIn 0.5s ease-out;
+}

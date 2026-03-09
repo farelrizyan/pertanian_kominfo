@@ -1,0 +1,166 @@
+.profil-page {
+  min-height: 100vh;
+  background-color: #ffffff;
+  padding-top: 10rem;
+  padding-bottom: 6rem;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Luxury Background Decor */
+.profil-bg-glow {
+  position: absolute;
+  width: 70vh;
+  height: 70vh;
+  background: radial-gradient(circle, rgba(59, 130, 246, 0.08) 0%, transparent 70%);
+  top: -20vh;
+  right: -10vw;
+  border-radius: 50%;
+  pointer-events: none;
+  filter: blur(80px);
+}
+
+.profil-bg-glow-2 {
+  position: absolute;
+  width: 80vh;
+  height: 80vh;
+  background: radial-gradient(circle, rgba(234, 179, 8, 0.05) 0%, transparent 70%);
+  bottom: -20vh;
+  left: -20vw;
+  border-radius: 50%;
+  pointer-events: none;
+  filter: blur(100px);
+}
+
+.profil-content {
+  position: relative;
+  z-index: 10;
+  max-width: 80rem;
+  margin: 0 auto;
+  padding: 0 5%;
+}
+
+.profil-header-card {
+  background: white;
+  border-radius: 3rem;
+  padding: 4rem;
+  box-shadow: 0 40px 100px -20px rgba(0, 0, 0, 0.05);
+  border: 1px solid #f1f5f9;
+  position: relative;
+  overflow: hidden;
+}
+
+.profil-header-accent {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 8px;
+  background: linear-gradient(90deg, #14532d, #16a34a, #ff7a00);
+}
+
+.profil-icon-wrapper {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 5rem;
+  height: 5rem;
+  border-radius: 1.5rem;
+  background: #f8fafc;
+  color: #14532d;
+  margin-bottom: 2rem;
+  box-shadow: 0 15px 35px -5px rgba(30, 58, 138, 0.1);
+  position: relative;
+}
+
+.profil-icon-glow {
+  position: absolute;
+  inset: -2px;
+  border-radius: 1.5rem;
+  background: linear-gradient(45deg, #14532d, #16a34a);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  z-index: -1;
+}
+
+.profil-icon-wrapper:hover .profil-icon-glow {
+  opacity: 0.2;
+}
+
+.profil-title {
+  font-size: 3.5rem;
+  font-weight: 900;
+  color: #0f172a;
+  margin-bottom: 1.5rem;
+  letter-spacing: -0.04em;
+  line-height: 1.1;
+}
+
+.profil-text {
+  font-size: 1.125rem;
+  line-height: 1.9;
+  color: #64748b;
+  max-width: 50rem;
+}
+
+/* Custom Cards */
+.feature-card {
+  background: white;
+  border-radius: 2rem;
+  padding: 2.5rem;
+  border: 1px solid #f1f5f9;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.02);
+  transition: all 0.5s cubic-bezier(0.2, 1, 0.3, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.feature-card:hover {
+  transform: translateY(-12px);
+  box-shadow: 0 40px 60px -15px rgba(0, 0, 0, 0.08);
+  border-color: #22c55e;
+}
+
+.feature-card-accent {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: #16a34a;
+  transform: scaleX(0);
+  transition: transform 0.4s ease;
+}
+
+.feature-card:hover .feature-card-accent {
+  transform: scaleX(1);
+}
+
+/* Org Tree Node */
+.org-tree-node {
+  background: white;
+  border: 1px solid #f1f5f9;
+  border-radius: 1.5rem;
+  padding: 2rem 1.5rem;
+  text-align: center;
+  min-width: 200px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.03);
+  transition: all 0.4s;
+}
+
+.org-tree-node:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.08);
+}
+
+@media (max-width: 1024px) {
+  .profil-header-card {
+    padding: 2.5rem;
+  }
+  .profil-title {
+    font-size: 2.5rem;
+  }
+  .profil-page {
+    padding-top: 8rem;
+  }
+}

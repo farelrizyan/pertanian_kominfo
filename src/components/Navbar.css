@@ -1,0 +1,243 @@
+/* Navbar.css refined for exact match to user images */
+
+.navbar-wrapper {
+  width: 100%;
+  position: fixed;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+/* White Top Header */
+.navbar-top {
+  background: #ffffff;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 5%;
+}
+
+.logo-section {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.logo-main {
+  height: 55px;
+  width: auto;
+}
+
+.logo-text h1 {
+  font-size: 24px;
+  font-weight: 800;
+  color: #14532d;
+  margin: 0;
+  line-height: 1;
+  text-transform: uppercase;
+  letter-spacing: -0.5px;
+}
+
+.logo-text p {
+  font-size: 11px;
+  font-weight: 700;
+  color: #64748b;
+  margin: 1px 0 0 0;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.search-section {
+  position: relative;
+  width: 300px;
+}
+
+.search-input {
+  width: 100%;
+  padding: 10px 20px;
+  padding-right: 45px;
+  background: #f1f5f9;
+  border: none;
+  border-radius: 50px;
+  font-size: 13px;
+  outline: none;
+  transition: all 0.3s;
+}
+
+.search-input:focus {
+  background: #e2e8f0;
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+}
+
+.search-icon {
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #94a3b8;
+  cursor: pointer;
+}
+
+/* Blue Bottom Header with Slanted Tabs */
+.navbar-bottom {
+  background: #16a34a; /* Primary green from image */
+  height: 50px;
+  display: flex;
+  align-items: stretch;
+  justify-content: space-between;
+  padding: 0 5%;
+  position: relative;
+}
+
+.nav-tabs {
+  display: flex;
+  align-items: stretch;
+  height: 100%;
+}
+
+.nav-tab-item {
+  display: flex;
+  align-items: center;
+  padding: 0 35px;
+  position: relative;
+  cursor: pointer;
+  color: white;
+  font-weight: 700;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  transition: all 0.3s;
+  background: transparent;
+  z-index: 1;
+}
+
+/* The Slant Effect */
+.nav-tab-item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -10px;
+  right: -10px;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.15);
+  transform: skewX(-20deg);
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.nav-tab-item:hover::before,
+.nav-tab-item.active::before {
+  opacity: 1;
+}
+
+/* Separator slant */
+.nav-tab-item:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  right: -1px;
+  top: 15%;
+  height: 70%;
+  width: 1px;
+  background: rgba(255, 255, 255, 0.2);
+  transform: skewX(-20deg);
+}
+
+/* LAPOR! Orange Box */
+.orange-box {
+  background: #ff6a00;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.3s;
+  padding: 0 25px;
+  position: relative;
+  margin-left: 20px;
+}
+
+.orange-box::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -15px;
+  right: 0;
+  bottom: 0;
+  background: #ff6a00;
+  transform: skewX(-20deg);
+  z-index: -1;
+}
+
+.orange-box:hover {
+  background: #e65f00;
+}
+
+/* Luxury Dropdown Style */
+.nav-dropdown-luxury {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: #ffffff;
+  min-width: 250px;
+  box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+  border-radius: 0 0 10px 10px;
+  padding: 10px 0;
+  border-bottom: 5px solid #ff6a00;
+  display: none;
+  z-index: 50;
+}
+
+.nav-tab-item:hover .nav-dropdown-luxury {
+  display: block;
+  animation: fadeInDown 0.3s ease-out;
+}
+
+.nav-link-item {
+  display: block;
+  padding: 12px 25px;
+  color: #334155;
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 600;
+  transition: all 0.2s;
+  border-left: 0px solid #16a34a;
+}
+
+.nav-link-item:hover {
+  background: #f8fafc;
+  color: #16a34a;
+  padding-left: 30px;
+  border-left-width: 5px;
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Mobile Adjustments */
+@media (max-width: 1024px) {
+  .navbar-top {
+    height: 70px;
+    padding: 0 20px;
+  }
+  
+  .logo-text h1 { font-size: 18px; }
+  .logo-text p { display: none; }
+  .search-section { display: none; }
+  
+  .nav-tabs { display: none; }
+  
+  .navbar-bottom {
+    height: 45px;
+    display: flex;
+    align-items: center;
+  }
+}
