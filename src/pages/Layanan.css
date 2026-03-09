@@ -1,8 +1,8 @@
 .layanan-page {
   min-height: 100vh;
   background-color: #ffffff;
-  padding-top: 10rem; /* Give more space for the luxury navbar */
-  padding-bottom: 6rem;
+  padding-top: 12rem;
+  padding-bottom: 8rem;
   position: relative;
 }
 
@@ -84,7 +84,7 @@
 .layanan-stat-card:hover {
   background: white;
   transform: translateY(-5px);
-  box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
   border-color: #22c55e;
 }
 
@@ -108,8 +108,8 @@
 .layanan-grid {
   display: grid;
   grid-template-columns: repeat(12, 1fr);
-  gap: 2rem;
-  margin-top: 4rem;
+  gap: 3.5rem;
+  margin-top: 8rem;
 }
 
 .layanan-item-wrapper {
@@ -273,5 +273,5 @@
   background: white;
   color: #0f172a;
   transform: scale(1.05);
-  box-shadow: 0 30px 60px rgba(0,0,0,0.2);
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.2);
 }
