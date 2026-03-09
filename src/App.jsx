@@ -1,22 +1,28 @@
-// App.js
+// App.jsx
 import React, { useState, useEffect } from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import { Navbar } from "./components/Navbar";
 import { Footer } from "./components/Footer";
 import { LoadingScreen } from "./components/LoadingScreen";
 import { Home } from "./pages/Home";
-import { ProfilPage } from "./pages/ProfilPage";
-import { Layanan } from "./pages/Layanan";
-<<<<<<< HEAD
 import { Berita } from "./pages/Berita";
-=======
+import { BeritaFoto } from "./pages/BeritaFoto";
+import { PPIDPage } from "./pages/PPIDPage";
+import { AdministrasiPage } from "./pages/AdministrasiPage";
+import { GaleriPage } from "./pages/GaleriPage";
+import { PimpinanKami } from "./pages/PimpinanKami";
+import { Overview } from "./pages/Overview";
+import { VisiMisiPage } from "./pages/VisiMisiPage";
+import { StrukturOrganisasi } from "./pages/StrukturOrganisasi";
+import { TugasFungsi } from "./pages/TugasFungsi";
+import { SatuanKerja } from "./pages/SatuanKerja";
+import { SumberDayaManusia } from "./pages/SumberDayaManusia";
+import { Mitra } from "./pages/Mitra";
+import { Layanan } from "./pages/Layanan";
 import { StandarPelayanan } from "./pages/StandarPelayanan";
 import { MaklumatLayanan } from "./pages/MaklumatLayanan";
 import { Pengaduan } from "./pages/Pengaduan";
 import { SurveyKepuasan } from "./pages/SurveyKepuasan";
->>>>>>> 891cdf240c66aa7fe406d199f199522054fc67e1
-import { PPIDPage } from "./pages/PPIDPage";
-import { GaleriPage } from "./pages/GaleriPage";
 import { Kontak } from "./pages/Kontak";
 import "./App.css";
 
@@ -36,26 +42,6 @@ function App() {
   }
 
   return (
-<<<<<<< HEAD
-    <Router>
-      <div className="app">
-        <Navbar />
-        <main className="main-content">
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/profil/*" element={<ProfilPage />} />
-            <Route path="/layanan" element={<Layanan />} />
-            <Route path="/berita" element={<Berita />} />
-            <Route path="/ppid" element={<PPIDPage />} />
-            <Route path="/galeri" element={<GaleriPage />} />
-            <Route path="/administrasi" element={<AdministrasiPage />} />
-            <Route path="/kontak" element={<Kontak />} />
-          </Routes>
-        </main>
-        <Footer />
-      </div>
-    </Router>
-=======
     <div className="font-sans selection:bg-red-200 selection:text-red-900 bg-white pt-[130px]">
       <Navbar />
       <Routes>
@@ -82,7 +68,6 @@ function App() {
       </Routes>
       <Footer />
     </div>
->>>>>>> 891cdf240c66aa7fe406d199f199522054fc67e1
   );
 }
 
