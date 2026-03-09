@@ -46,10 +46,10 @@ export const Navbar = () => {
       name: "Layanan",
       href: "/layanan",
       dropdown: [
-        { name: "Standar Pelayanan", href: "/layanan" },
-        { name: "Maklumat Layanan", href: "/layanan" },
-        { name: "Pengaduan", href: "/layanan" },
-        { name: "Survey Kepuasan", href: "/layanan" },
+        { name: "Standar Pelayanan", href: "/layanan/standar-pelayanan" },
+        { name: "Maklumat Layanan", href: "/layanan/maklumat-layanan" },
+        { name: "Pengaduan", href: "/layanan/pengaduan" },
+        { name: "Survey Kepuasan", href: "/layanan/survey-kepuasan" },
       ]
     },
     {

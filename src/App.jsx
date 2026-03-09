@@ -16,6 +16,10 @@ import { TugasFungsi } from "./pages/TugasFungsi";
 import { SatuanKerja } from "./pages/SatuanKerja";
 import { SumberDayaManusia } from "./pages/SumberDayaManusia";
 import { Layanan } from "./pages/Layanan";
+import { StandarPelayanan } from "./pages/StandarPelayanan";
+import { MaklumatLayanan } from "./pages/MaklumatLayanan";
+import { Pengaduan } from "./pages/Pengaduan";
+import { SurveyKepuasan } from "./pages/SurveyKepuasan";
 import { PPIDPage } from "./pages/PPIDPage";
 import { AdministrasiPage } from "./pages/AdministrasiPage";
 import { GaleriPage } from "./pages/GaleriPage";
@@ -49,7 +53,11 @@ export default function App() {
         <Route path="/profil/satuan-kerja" element={<SatuanKerja />} />
         <Route path="/profil/sumber-daya-manusia" element={<SumberDayaManusia />} />
         <Route path="/mitra" element={<Mitra />} />
-        <Route path="/layanan/*" element={<Layanan />} />
+        <Route path="/layanan" element={<Layanan />} />
+        <Route path="/layanan/standar-pelayanan" element={<StandarPelayanan />} />
+        <Route path="/layanan/maklumat-layanan" element={<MaklumatLayanan />} />
+        <Route path="/layanan/pengaduan" element={<Pengaduan />} />
+        <Route path="/layanan/survey-kepuasan" element={<SurveyKepuasan />} />
         <Route path="/kontak" element={<Kontak />} />
       </Routes>
       <Footer />
